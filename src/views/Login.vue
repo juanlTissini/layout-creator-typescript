@@ -69,7 +69,7 @@ export default class Login extends Vue {
   checkbox: boolean = false
 
   validate() {
-    this.$refs.form.validate()
+    console.log(this.$refs.form.validate())
   }
   reset() {
     this.$refs.form.reset()
