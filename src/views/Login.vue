@@ -1,40 +1,45 @@
 <template>
   <!-- <img :src="require(`@/assets/tissini.png`)" alt style="width: 120px;" /> -->
   <v-container class="grey lighten-5 fill-height">
-    <v-row class="mb-6" justify-md="center" align="center" no-gutters>
-      <v-col lg="2">
-        <v-card class="pa-2" outlined tile>
-          1 of 3
-        </v-card>
-      </v-col>
-      <v-col md="auto">
-        <v-card class="pa-2" outlined tile>
-          Variable width content
-        </v-card>
-      </v-col>
-      <v-col lg="2">
-        <v-card class="pa-2" outlined tile>
-          3 of 3
-        </v-card>
+    <v-row
+      align="center"
+      justify-md="center"
+      style="height: 95vh; border: 1px solid blue;"
+    >
+      <v-col sm="11" md="6" lg="4">
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-text-field
+            v-model="name"
+            :counter="10"
+            :rules="nameRules"
+            label="Name"
+            required
+          ></v-text-field>
+
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="E-mail"
+            required
+          ></v-text-field>
+
+          <v-btn
+            :disabled="!valid"
+            color="success"
+            class="mr-4"
+            @click="validate"
+          >
+            Validate
+          </v-btn>
+
+          <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
+
+          <v-btn color="warning" @click="resetValidation">
+            Reset Validation
+          </v-btn>
+        </v-form>
       </v-col>
     </v-row>
-    <!-- <v-row no-gutters>
-      <v-col>
-        <v-card class="pa-2" outlined tile>
-          1 of 3
-        </v-card>
-      </v-col>
-      <v-col md="auto">
-        <v-card class="pa-2" outlined tile>
-          Variable width content
-        </v-card>
-      </v-col>
-      <v-col lg="2">
-        <v-card class="pa-2" outlined tile>
-          3 of 3
-        </v-card>
-      </v-col>
-    </v-row> -->
   </v-container>
 </template>
 
@@ -47,6 +52,31 @@ export default class Login extends Vue {
   user: string = ''
   password: string = ''
   alignments: Array<string> = ['start', 'center', 'end']
+
+  valid: boolean = true
+  name: string = ''
+  nameRules: Array<any> = [
+    (v) => !!v || 'Name is required',
+    (v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
+  ]
+  email: string = ''
+  emailRules: Array<any> = [
+    (v) => !!v || 'E-mail is required',
+    (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+  ]
+  select: string | null = null
+  items: Array<string> = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+  checkbox: boolean = false
+
+  validate() {
+    this.$refs.form.validate()
+  }
+  reset() {
+    this.$refs.form.reset()
+  }
+  resetValidation() {
+    this.$refs.form.resetValidation()
+  }
 }
 </script>
 
