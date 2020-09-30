@@ -4,7 +4,7 @@
     <v-row
       align="center"
       justify-md="center"
-      style="height: 95vh; border: 1px solid blue"
+      style="height: 95vh; border: 1px solid blue;"
     >
       <v-col sm="11" md="6" lg="4">
         <v-form ref="form" v-model="valid" lazy-validation>
@@ -56,20 +56,20 @@ export default class Login extends Vue {
   valid: boolean = true
   name: string = ''
   nameRules: Array<any> = [
-    (v) => !!v || 'Name is required',
-    (v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
+    (v: any) => !!v || 'Name is required',
+    (v: any) => (v && v.length <= 10) || 'Name must be less than 10 characters',
   ]
   email: string = ''
   emailRules: Array<any> = [
-    (v) => !!v || 'E-mail is required',
-    (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+    (v: any) => !!v || 'E-mail is required',
+    (v: any) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
   ]
   select: string | null = null
   items: Array<string> = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
   checkbox: boolean = false
 
   validate() {
-    console.log(this.$refs.form.validate())
+    this.$refs.form.validate()
   }
   reset() {
     this.$refs.form.reset()
